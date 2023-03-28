@@ -1,4 +1,4 @@
-name: ElasticWorlkflow
+name: BasicWorlkflow
 on:
   workflow_dispatch:
 jobs:
