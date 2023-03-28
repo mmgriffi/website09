@@ -1,4 +1,4 @@
-name: BasicWorlkflow
+name: BasicWorlkflow_ELK
 on:
   workflow_dispatch:
 jobs:
