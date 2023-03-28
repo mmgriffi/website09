@@ -1,9 +1,20 @@
-name: ElasticWorlkflow
+name: BasicWorlkflow
 on:
   workflow_dispatch:
 jobs:
+  run-demo-app:
+    runs-on: aws_runner
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Set up Python 3.10.6
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10.6'
+    - name: Run script that echo outputs
+      run: python main.py
   upload-logs-to-elastic:
-    runs-on: ubuntu-latest
+    runs-on: aws_runner
     needs: run-demo-app
     if: always()
     steps:
@@ -18,17 +29,3 @@ jobs:
         elastic_api_key_id: "github2"
         elastic_api_key: "V3piQ0o0Y0JwSVdRZlJXdG9Tcm06TUd0V1BZSklSRUt6Q3VYU1o3MzREZw=="
         elastic_index: "ci-cd"
-  run-demo-app:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        submodules: 'recursive'
-        token: ${{ secrets.GITHUB }}
-    - name: Set up Python 3.10.6
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.10.6'
-    - name: Run script that echo outputs
-      run: python main.py
